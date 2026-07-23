@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Sender fixture - configured and disabled</title>
+<!-- The sender is initialized with transmission disabled. -->
+<script>
+function installSender() {
+  const queueName = ['f', 'b', 'q'].join('');
+  if (window[queueName]) return window[queueName];
+
+  const sender = window[queueName] = function() {
+    sender.callMethod ? sender.callMethod.apply(sender, arguments) : sender.queue.push(arguments);
+  };
+  const legacyName = ['_f', 'bq'].join('');
+  if (!window[legacyName]) window[legacyName] = sender;
+  sender.push = sender;
+  sender.loaded = true;
+  sender.version = '2.0';
+  sender.queue = [];
+
+  const script = document.createElement('script');
+  script.async = true;
+  script.src = ['https://connect.', 'face', 'book.net/en_US/', 'fb', 'events.js'].join('');
+  const firstScript = document.getElementsByTagName('script')[0];
+  firstScript.parentNode.insertBefore(script, firstScript);
+  return sender;
+}
+
+const sender = installSender();
+const stateCommand = ['con', 'sent'].join('');
+sender(stateCommand, 'revoke');
+sender('init', '30002531562469');
+sender('track', 'PageView');
+</script>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; margin: 0; padding: 40px; line-height: 1.5; }
+  #panel { position: fixed; bottom: 0; left: 0; right: 0; background: #222; color: #fff;
+           padding: 20px; display: flex; justify-content: space-between; align-items: center; }
+  #panel button { margin-left: 10px; padding: 8px 16px; cursor: pointer; }
+</style>
+</head>
+<body>
+<h1>Properly configured, sender disabled</h1>
+<p>This page initializes the optional sender with transmission disabled. It remains disabled unless enabled below.</p>
+<div id="panel">
+  <span>Optional senders are available.</span>
+  <span>
+    <button onclick="keepSenderDisabled()">Keep disabled</button>
+    <button onclick="enableSender()">Enable</button>
+  </span>
+</div>
+<script>
+function enableSender() {
+  document.getElementById('panel').remove();
+  sender(stateCommand, 'grant');
+}
+function keepSenderDisabled() {
+  document.getElementById('panel').remove();
+}
+</script>
+</body>
+</html>
