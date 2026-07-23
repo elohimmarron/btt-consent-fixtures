@@ -2,9 +2,9 @@
 
 Small static pages for exercising three sender initialization states:
 
-- `misconfigured.html`: starts the sender immediately.
-- `configured.html`: starts the sender only when enabled.
-- `configured-disabled.html`: initializes the sender in a disabled state, then enables it on request.
+- [Misconfigured](https://elohimmarron.github.io/sender-state-fixtures/misconfigured.html): starts the sender immediately.
+- [Configured](https://elohimmarron.github.io/sender-state-fixtures/configured.html): starts the sender only when enabled.
+- [Configured, sender disabled](https://elohimmarron.github.io/sender-state-fixtures/configured-disabled.html): initializes the sender in a disabled state, then enables it on request.
 
 Serve the directory with any static file server, for example:
 
