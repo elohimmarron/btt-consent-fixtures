@@ -21,29 +21,21 @@
   </span>
 </div>
 <script>
-function loadSender() {
-  const queueName = ['f', 'b', 'q'].join('');
-  const sender = window[queueName] = function() {
-    sender.callMethod ? sender.callMethod.apply(sender, arguments) : sender.queue.push(arguments);
-  };
-  const legacyName = ['_f', 'bq'].join('');
-  if (!window[legacyName]) window[legacyName] = sender;
-  sender.push = sender;
-  sender.loaded = true;
-  sender.version = '2.0';
-  sender.queue = [];
-
-  const script = document.createElement('script');
-  script.async = true;
-  script.src = ['https://connect.', 'face', 'book.net/en_US/', 'fb', 'events.js'].join('');
-  const firstScript = document.getElementsByTagName('script')[0];
-  firstScript.parentNode.insertBefore(script, firstScript);
-  sender('init', '30002531562469');
-  sender('track', 'PageView');
+function loadMetaPixel() {
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '30002531562469');
+  fbq('track', 'PageView');
 }
 function enableSender() {
   document.getElementById('panel').remove();
-  loadSender();
+  loadMetaPixel();
 }
 function keepSenderDisabled() {
   document.getElementById('panel').remove();

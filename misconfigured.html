@@ -5,31 +5,16 @@
 <title>Sender fixture - misconfigured</title>
 <!-- The sender starts before the visitor selects a mode. -->
 <script>
-function installSender() {
-  const queueName = ['f', 'b', 'q'].join('');
-  if (window[queueName]) return window[queueName];
-
-  const sender = window[queueName] = function() {
-    sender.callMethod ? sender.callMethod.apply(sender, arguments) : sender.queue.push(arguments);
-  };
-  const legacyName = ['_f', 'bq'].join('');
-  if (!window[legacyName]) window[legacyName] = sender;
-  sender.push = sender;
-  sender.loaded = true;
-  sender.version = '2.0';
-  sender.queue = [];
-
-  const script = document.createElement('script');
-  script.async = true;
-  script.src = ['https://connect.', 'face', 'book.net/en_US/', 'fb', 'events.js'].join('');
-  const firstScript = document.getElementsByTagName('script')[0];
-  firstScript.parentNode.insertBefore(script, firstScript);
-  return sender;
-}
-
-const sender = installSender();
-sender('init', '30002531562469');
-sender('track', 'PageView');
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '30002531562469');
+fbq('track', 'PageView');
 </script>
 <style>
   body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; margin: 0; padding: 40px; line-height: 1.5; }
