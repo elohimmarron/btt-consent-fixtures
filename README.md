@@ -1,6 +1,6 @@
 # Sender state fixtures
 
-Small static pages for exercising three sender initialization states:
+Static pages for exercising three sender initialization states:
 
 - [Misconfigured](https://elohimmarron.github.io/sender-state-fixtures/misconfigured.html): starts the sender immediately.
 - [Configured](https://elohimmarron.github.io/sender-state-fixtures/configured.html): starts the sender only when enabled.
